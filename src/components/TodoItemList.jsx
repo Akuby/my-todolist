@@ -11,7 +11,7 @@ class TodoItemList extends Component {
   render() {
     const result = this.props.listItem.map(
       (data, idx) => (
-        <TodoItem key={idx} title={data.title} sub={data.sub} dueDate={data.dueDate}/>
+        <TodoItem key={idx} title={data.title} date={data.date} delTodo={this.props.delTodo}/>
       )
     )
     return (

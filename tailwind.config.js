@@ -5,7 +5,11 @@ module.exports = {
     extend: {
       fontFamily: {
         'sans': ['Pretendard']
-      }
+      },
+      colors: {
+        'bg01': '#ffc3a0',
+        'bg02' : '#ffafbd'
+      },
     },
   },
   plugins: [],
