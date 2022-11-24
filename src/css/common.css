@@ -74,3 +74,13 @@
 .b-contain:has(input[type="checkbox"]:checked) > h2 {
   text-decoration: line-through;
 }
+.react-datepicker__close-icon {
+  left: 200px;
+}
+.react-datepicker__close-icon::after {
+  background-color: #e8e8e8;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}

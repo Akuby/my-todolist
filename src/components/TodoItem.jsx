@@ -38,7 +38,7 @@ function TodoItem(props) {
     } else if (isEditing === false) {
       return(
         <div className="flex flex-wrap justify-center my-3">
-          <p className="text-transparent bg-clip-text bg-gradient-to-l from-bg01 to-bg02 font-semibold text-lg w-4/5 mb-1">{sub_date.match(/\d{4}-\d{2}-\d{2}/)[0]}</p>
+          <p className={`text-lg w-4/5 mb-1 ${taskDone ? "text-gray-300" : "font-semibold text-transparent bg-clip-text bg-gradient-to-l from-bg01 to-bg02"}`}>{sub_date.match(/\d{4}-\d{2}-\d{2}/)[0]}</p>
           <li className={`w-4/5 list-none rounded-lg text-white p-3 mb-1 relative flex items-center ${taskDone ? "bg-gray-200" : "bg-gradient-to-l from-bg01 to-bg02 shadow shadow-rose-200"}`} >
             <label className='b-contain'>
               <input type="checkbox" className='m-2 rounded-full bg-transparent' onClick={
