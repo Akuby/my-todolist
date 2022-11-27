@@ -5,7 +5,6 @@ import { registerLocale } from 'react-datepicker';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import "../css/common.css"
-import axios from "axios";
 
 function TodoItemInput (props) {
   
@@ -20,7 +19,7 @@ function TodoItemInput (props) {
     // 엔터키 누를 시 기본 설정으로 할일 목록에 추가
     if (e.key === 'Enter') {
       const newInput = inputValue
-      props.addTodo(newInput, dueDate, repeatTil)
+      addTodo(newInput, dueDate, repeatTil)
       e.target.value = ''
     }
   }

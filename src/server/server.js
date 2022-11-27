@@ -50,6 +50,22 @@ app.put('/todo', (req, res) => {
   })
 })
 
+app.put('/todo-mod/', (req, res) => {
+  console.log(req.body)
+  const id = req.body.id;
+  const name = req.body.name;
+  const dueDate = req.body.dueDate;
+  console.log(name, dueDate)
+  db.query(`UPDATE todo SET name='${name}', due_date='${dueDate}' where id=${id}`, (err, data) => {
+    if(!err) {
+      console.log('수정 성공!')
+      console.log(data.message)
+    } else {
+      console.log(err)
+    }
+  })
+})
+
 app.delete('/todo/:id', (req, res) => {
   const id = (req.params.id)
   db.query(`DELETE FROM todo WHERE id=${id}`, (err, data) => {

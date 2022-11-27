@@ -23,8 +23,9 @@ function App() {
   }
 
   const addTodo = async(todoArr) => {
+    const concatedList = todoArr.concat(todoList)
+    setTodoList(concatedList)
     await axios.post('/todo', todoArr)
-    setTodoList(todoList.unshift(todoArr))
   }
   
   const delTodo = async(delTarget) => {
@@ -35,13 +36,17 @@ function App() {
       await axios.delete('/todo/'+delTarget);
     }
 
+  const modTodo = async(id, name, dueDate) => {
+    console.log(id, name, dueDate)
+    await axios.put('/todo-mod/', {id:id, name:name, dueDate:dueDate})
+  }
 
   return(
     <div id='App' className='font-sans pt-20'>
       <h1 className='text-3xl font-bold w-4/5 mx-auto my-3'>🌠 오늘도 화이팅!</h1>
       <p className='w-4/5 mx-auto'>{dailyAdvice !== null ? `${dailyAdvice.message} - ${dailyAdvice.author}` : '명언 출력 실패'}</p>
       <TodoItemInput todoList={todoList} addTodoList={addTodo} dataLoading={dataLoading}/>
-      <TodoItemList todoList={todoList} delTodo={delTodo}/>
+      <TodoItemList todoList={todoList} delTodo={delTodo} modTodo={modTodo}/>
     </div>
   )
 }
