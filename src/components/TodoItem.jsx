@@ -1,34 +1,60 @@
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { faPen, faTrashCan, faSave } from '@fortawesome/free-solid-svg-icons'
 import '../css/common.css'
 import axios from 'axios'
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 function TodoItem(props) {
   
   const {id, name, due_date, sub_date, is_done, is_continued} = props.todoList
+  const [myName, setMyName] = useState(name);
+  const [myDueDate, SetMyDueDate] = useState(due_date);
+  const [myIsContinued, setMyIsContinued] = useState(is_continued);
   const [isEditing, setIsEditing] = useState(false)
-  const [taskDone, setTaskDone] = useState(
-    is_done === 0 ? false : true
-    )
+  const [taskDone, setTaskDone] = useState( is_done === 0 ? false : true )
 
-  const sendDelTitle = () => {
-    const name = props.name
-    props.delTodo(name)
+  const handleRepeatTil = () => {
+    
+  }
+
+  const sendDelTarget = () => {
+    const targetID = props.todoList.id
+    props.delTodo(targetID)
   }
   const editMode = () => {
     setIsEditing(!isEditing)
+    const dayArr = props.todoList.is_continued;
+    
   }
     if (isEditing === true) {
       return(
         <div className="flex flex-wrap justify-center my-3">
-          <p className="text-transparent bg-clip-text bg-gradient-to-l from-bg01 to-bg02 font-semibold text-lg w-4/5 mb-1">{props.date}</p>
-          <li className="w-4/5 list-none shadow shadow-rose-200 rounded-lg bg-gradient-to-l from-bg01 to-bg02 text-white p-3 mb-1 relative flex" >
-              <input className='bg-transparent' type="text" defaultValue={props.todoList.name}></input>
+          <p className={`text-lg w-4/5 mb-1 ${taskDone ? "text-gray-300" : "font-semibold text-transparent bg-clip-text bg-gradient-to-l from-bg01 to-bg02"}`}>{sub_date.match(/\d{4}-\d{2}-\d{2}/)[0]}</p>
+          <li className="w-4/5 list-none shadow shadow-rose-200 rounded-lg bg-gradient-to-r from-bg01 to-bg02 text-white p-3 mb-1 relative flex onEditing" >
+            <div>
+              <input className='bg-transparent text-gray-700' type="text" defaultValue={props.todoList.name}></input>
+              <DatePicker
+              dateFormat="yyyy/MM/dd"
+              className="rounded-lg text-center p-2 text-gray-600 w-full focus:outline-none"
+              selected={new Date(props.todoList.due_date)} 
+              onChange={(date) => SetMyDueDate(date)}
+              />                
+              <div>
+                <button className="rounded-lg p-2 px-3 bg-white text-gray-700 day-active" onClick={handleRepeatTil}>월</button>
+                <button className="rounded-lg p-2 px-3 bg-white text-gray-700" onClick={handleRepeatTil}>화</button>
+                <button className="rounded-lg p-2 px-3 bg-white text-gray-700" onClick={handleRepeatTil}>수</button>
+                <button className="rounded-lg p-2 px-3 bg-white text-gray-700" onClick={handleRepeatTil}>목</button>
+                <button className="rounded-lg p-2 px-3 bg-white text-gray-700" onClick={handleRepeatTil}>금</button>
+                <button className="rounded-lg p-2 px-3 bg-white text-gray-700" onClick={handleRepeatTil}>토</button>
+                <button className="rounded-lg p-2 px-3 bg-white text-gray-700" onClick={handleRepeatTil}>일</button>
+              </div>
+              </div>
               <div className='absolute inset-y-2 right-4'>
               <button className='w-5 m-1 mr-3' onClick={editMode}>
-              <FontAwesomeIcon icon={faPen} />
+              <FontAwesomeIcon icon={faSave} />
               </button>
-              <button className='w-5 m-1' onClick={sendDelTitle}>
+              <button className='w-5 m-1' onClick={sendDelTarget}>
               <FontAwesomeIcon icon={faTrashCan} />
               </button>
               </div>
@@ -54,14 +80,14 @@ function TodoItem(props) {
               defaultChecked={taskDone ? true : false}
                 />
               <div className="b-input"></div>
-              <h2 className="font-regular">{name}</h2>
+              <h2 className="font-regular">{myName}</h2>
               </label>
-              <p className='text-sm ml-2'>{'~'+due_date.match(/\d{4}-\d{2}-\d{2}/)[0]}</p>
+              <p className='text-sm ml-2'>{'~'+myDueDate}</p>
               <div className='absolute inset-y-2 right-4'>
               <button className={taskDone ? "hidden" : "w-5 m-1 mr-3"} onClick={editMode}>
               <FontAwesomeIcon icon={faPen} />
               </button>
-              <button className='w-5 m-1' onClick={sendDelTitle}>
+              <button className='w-5 m-1' onClick={sendDelTarget}>
               <FontAwesomeIcon icon={faTrashCan} />
               </button>
               </div>

@@ -75,7 +75,7 @@
   text-decoration: line-through;
 }
 .react-datepicker__close-icon {
-  left: 200px;
+  right: 20px;
 }
 .react-datepicker__close-icon::after {
   background-color: #e8e8e8;
@@ -83,4 +83,8 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+}
+.day-active {
+  background-color: #FB7185;
+  color: #fff;
 }
